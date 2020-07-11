@@ -1,184 +1,307 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(
-  debugShowCheckedModeBanner: false,
-  theme: ThemeData(fontFamily: 'Roboto'),
-  home: HomePage(),
-));
 
-class HomePage extends StatefulWidget {
+void main() => runApp(App());
+
+class App extends StatelessWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false, title: "hello", home: Home());
+  }
 }
 
-class _HomePageState extends State<HomePage> {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(244, 243, 243, 1),
+      backgroundColor: Color(0xFFbdc3c7),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
+        title: Center(child: Text("Wallet")),
+        backgroundColor: Color.fromARGB(255, 20, 0, 200),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.notifications),
+            color: Colors.white,
+            onPressed: () {},
+          )
+        ],
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            color: Colors.black87,
-          ),
-          onPressed: () {},
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [Color(0xFFe67e22), Color(0xFFf1c40f)])),
+              accountName: Text("sessionUsername"),
+              accountEmail: Text("mail"),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"),
+              ),
+            ),
+            ListTile(
+              title: Text("Home"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Prices"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Balance"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Account"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Settings"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Help"),
+              onTap: () {},
+            ),
+          ],
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(30))),
-                padding: EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Find Your',
-                      style: TextStyle(color: Colors.black87, fontSize: 25),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'Inspiration',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: Color.fromRGBO(244, 243, 243, 1),
-                          borderRadius: BorderRadius.circular(15)),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: Colors.black87,
-                            ),
-                            hintText: "Search you're looking for",
-                            hintStyle:
-                            TextStyle(color: Colors.grey, fontSize: 15)),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 240.0,
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 20, 0, 200),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(40.0),
+                  bottomRight: Radius.circular(40.0),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: Container(
+                child: Stack(
                   children: <Widget>[
-                    Text(
-                      'Promo Today',
-                      style:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
                     Container(
-                      height: 200,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
+                      margin:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          promoCard('assets/card1.jpg'),
-                          promoCard('assets/harley.jpg'),
-                          promoCard('assets/students.jpg'),
-                          promoCard('assets/videobg.jpg'),
+                          Text("Current Balance",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              )),
+                          Text("USD",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              )),
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/images/three.jpg')),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomRight,
-                              stops: [
-                                0.3,
-                                0.9
-                              ],
-                              colors: [
-                                Colors.black.withOpacity(.8),
-                                Colors.black.withOpacity(.2)
-                              ]),
-                        ),
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Text(
-                              'Best Design',
-                              style:
-                              TextStyle(color: Colors.white, fontSize: 20),
+                      margin:
+                      EdgeInsets.symmetric(horizontal: 15, vertical: 40),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("\$32,452",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xFF2ecc71),
+                              borderRadius: BorderRadius.circular(10),
                             ),
+                            child: Text("+ 3.5%",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                )),
                           ),
-                        ),
+                        ],
                       ),
-                    )
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      left: 20,
+                      child: Text("3 214589 WXB",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          )),
+                    ),
                   ],
                 ),
-              )
-            ],
-          ),
+                margin: EdgeInsets.all(15.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFe67e22), Color(0xFFf1c40f)])),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Expanded(
+                    child: RaisedButton.icon(
+                        onPressed: () {},
+                        icon:
+                        Icon(Icons.arrow_upward, color: Color(0xff3498db)),
+                        color: Colors.white,
+                        label: Text("Send"),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        )),
+                  ),
+                  SizedBox(
+                    width: 28,
+                  ),
+                  Expanded(
+                    child: RaisedButton.icon(
+                      onPressed: () {},
+                      icon:
+                      Icon(Icons.arrow_downward, color: Color(0xFF2ecc71)),
+                      color: Colors.white,
+                      label: Text("Receive"),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Currency",
+                style: TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+            ),
+            Container(
+              child: Column(
+                children: <Widget>[
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    child: ListTile(
+                      contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      leading: CircleAvatar(
+                        backgroundColor: Color(0xffecf0f1),
+                        child: Icon(
+                          Icons.monetization_on,
+                          color: Colors.black,
+                        ),
+                      ),
+                      title: Text("Bitcoin"),
+                      trailing: Text("\$8,000"),
+                    ),
+                  ),
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    child: ListTile(
+                      contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      leading: CircleAvatar(
+                        backgroundColor: Color(0xffecf0f1),
+                        child: Icon(
+                          Icons.monetization_on,
+                          color: Colors.black,
+                        ),
+                      ),
+                      title: Text("Bitcoin"),
+                      trailing: Text("\$8,000"),
+                    ),
+                  ),
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    child: ListTile(
+                      contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      leading: CircleAvatar(
+                        backgroundColor: Color(0xffecf0f1),
+                        child: Icon(
+                          Icons.monetization_on,
+                          color: Colors.black,
+                        ),
+                      ),
+                      title: Text("Bitcoin"),
+                      trailing: Text("\$8,000"),
+                    ),
+                  ),
+                  Card(
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    child: ListTile(
+                      contentPadding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      leading: CircleAvatar(
+                        backgroundColor: Color(0xffecf0f1),
+                        child: Icon(
+                          Icons.monetization_on,
+                          color: Colors.black,
+                        ),
+                      ),
+                      title: Text("Bitcoin"),
+                      trailing: Text("\$8,000"),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
-    );
-  }
-
-  Widget promoCard(image) {
-    return AspectRatio(
-      aspectRatio: 2.62 / 3,
-      child: Container(
-        margin: EdgeInsets.only(right: 15.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(fit: BoxFit.cover, image: AssetImage(image)),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(begin: Alignment.bottomRight, stops: [
-                0.1,
-                0.9
-              ], colors: [
-                Colors.black.withOpacity(.8),
-                Colors.black.withOpacity(.1)
-              ])),
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text("Home"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text("Search"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check_box),
+            title: Text("Check"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            title: Text("Account"),
+          ),
+        ],
+        currentIndex: 0,
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Color(0xFFe67e22),
+        backgroundColor: Color.fromARGB(255, 20, 0, 200),
       ),
     );
   }
